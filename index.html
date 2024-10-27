@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suko, będziesz pokorna</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <link href="./styles.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="gif-grid" id="gifGrid"></div>
+
+<div class="container">
+    <h1>Suko, będziesz pokorna?</h1>
+
+    <div class="buttons">
+        <button id="yes">Tak</button>
+        <button id="no">Nie</button>
+    </div>
+</div>
+
+<!-- Message Element -->
+<div class="message" id="message">Bardzo dobrze, taka masz być</div>
+
+<script>
+    const noButton = document.getElementById("no");
+    const yesButton = document.getElementById("yes");
+    const messageDiv = document.getElementById("message");
+
+    // Funkcja do losowego ustawienia pozycji dla przycisku "Nie"
+    noButton.addEventListener("mouseenter", () => {
+        const maxX = window.innerWidth - noButton.clientWidth - 10; // 10px marginesu
+        const maxY = window.innerHeight - noButton.clientHeight - 10; // 10px marginesu
+
+        const randomX = Math.floor(Math.random() * Math.max(0, maxX));
+        const randomY = Math.floor(Math.random() * Math.max(0, maxY));
+        
+        noButton.style.position = "absolute";
+        noButton.style.left = `${randomX}px`;
+        noButton.style.top = `${randomY}px`;
+    });
+
+    // Funkcja do przetasowania tablicy
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Funkcja do dodania GIF-ów do siatki w losowej kolejności
+    function addBackgroundGifs() {
+        const gifGrid = document.getElementById("gifGrid");
+        const gifPaths = Array.from({ length: 16 }, (_, i) => `${i + 1}.gif`);
+        const shuffledGifs = shuffleArray(gifPaths);
+
+        shuffledGifs.forEach(src => {
+            const img = document.createElement("img");
+            img.src = src;
+            img.classList.add("background-gif");
+            gifGrid.appendChild(img);
+        });
+    }
+
+    // Event listener for the "Tak" button
+    yesButton.addEventListener("click", () => {
+    window.location.href = 'fajerwerki.html'; // Otwórz nową stronę
+});
+
+    // Wywołanie funkcji po załadowaniu strony
+    window.onload = addBackgroundGifs;
+</script>
+
+</body>
+</html>
