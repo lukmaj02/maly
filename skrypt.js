@@ -54,9 +54,10 @@ function paint() {
     ctx.font = '40px Poppins'; // Czcionka i rozmiar
     ctx.textAlign = 'center'; // Wyśrodkowanie tekstu
     ctx.textBaseline = 'middle'; // Wyrównanie do środka
-    ctx.fillText("Bardzo dobrze", w / 2, h / 2); 
-    ctx.fillText("Taka masz byc", w / 2, h / 2); 
+    ctx.fillText("Bardzo dobrze", w / 2, h / 2 - 20); // Wyśrodkowanie tekstu "Bardzo dobrze"
+    ctx.fillText("Taka masz być", w / 2, h / 2 + 20); // Wyśrodkowanie tekstu "Taka masz być"
 }
+
 
 function createFirework() {
     xPoint = Math.random() * (w - 200) + 100;
@@ -108,20 +109,22 @@ Particle.prototype = {
 
 const noButton = document.getElementById("no");
 const yesButton = document.getElementById("yes");
-const messageDiv = document.getElementById("message");
 
-// Funkcja do losowego ustawienia pozycji dla przycisku "Nie"
-noButton.addEventListener("mouseenter", () => {
-    const maxX = window.innerWidth - noButton.clientWidth - 10; // 10px marginesu
-    const maxY = window.innerHeight - noButton.clientHeight - 10; // 10px marginesu
-
-    const randomX = Math.floor(Math.random() * Math.max(0, maxX));
-    const randomY = Math.floor(Math.random() * Math.max(0, maxY));
-
-    noButton.style.position = "absolute";
-    noButton.style.left = `${randomX}px`;
-    noButton.style.top = `${randomY}px`;
+// Event listener for the "Tak" button
+yesButton.addEventListener("click", () => {
+    messageDiv.style.display = 'block'; // Show the message
+    document.body.style.backgroundColor = "black"; // Change background to black
+    canvas.style.display = 'block'; // Show the canvas for fireworks
+    resizeCanvas(); // Ensure canvas is resized to full screen
 });
+
+// Event listener for the "Nie" button
+noButton.addEventListener("click", (event) => {
+    event.preventDefault(); // Prevent default action if any
+    console.log("Nie button clicked"); // Log click for debugging
+    messageDiv.style.display = 'none'; // Hide the message
+});
+
 
 // Funkcja do dodania GIF-ów do siatki w losowej kolejności
 function addBackgroundGifs() {
