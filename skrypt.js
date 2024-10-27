@@ -54,7 +54,8 @@ function paint() {
     ctx.font = '40px Poppins'; // Czcionka i rozmiar
     ctx.textAlign = 'center'; // Wyśrodkowanie tekstu
     ctx.textBaseline = 'middle'; // Wyrównanie do środka
-    ctx.fillText("Bardzo dobrze, taka masz być", w / 2, h / 2); // Narysuj tekst
+    ctx.fillText("Bardzo dobrze", w / 2, h / 2); 
+    ctx.fillText("Taka masz byc", w / 2, h / 2); 
 }
 
 function createFirework() {
